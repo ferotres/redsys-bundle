@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+
+        <service
+            id="ferotres_redsys.redirection"
+            class="Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection"
+            public="true"
+        />
+
+
+        <service
+            id="ferotres_redsys.url_factory"
+            class="Ferotres\RedsysBundle\Redsys\Services\UrlFactory"
+        >
+            <argument key="$urlGenerator" type="service" id="router" />
+        </service>
+
+
+        <service
+            id="ferotres_redsys.controller.redsys_controller"
+            class="Ferotres\RedsysBundle\Controller\RedsysController"
+            public="true"
+        >
+            <argument type="service" id="ferotres_redsys.redirection" />
+            <argument type="service" id="debug.event_dispatcher.inner" />
+            <argument type="service" id="ferotres_redsys.redsys_order_trace_repository" />
+        </service>
+
+
+        <service
+            id="ferotres_redsys.redsys_order_trace_repository"
+            class="Ferotres\RedsysBundle\Repository\RedsysOrderTraceRepository"
+            public="true"
+        >
+            <factory service="doctrine.orm.entity_manager" method="getRepository"/>
+            <argument>Ferotres\RedsysBundle\Entity\RedsysOrderTrace</argument>
+        </service>
+
+
+    </services>
+</container>

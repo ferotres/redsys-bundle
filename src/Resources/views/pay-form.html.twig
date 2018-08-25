@@ -1,0 +1,7 @@
+<div id="redsys_pay_form_wrapper">
+    <form id="redsys_pay_form" method="POST" action="{{ redsysOrder.url }}">
+        <input type="hidden" name="Ds_SignatureVersion" value="{{ redsysOrder.version }}"/>
+        <input type="hidden" name="Ds_MerchantParameters" value="{{ redsysOrder.orderData }}"/>
+        <input type="hidden" name="Ds_Signature" value="{{ redsysOrder.signature }}"/>
+    </form>
+</div>

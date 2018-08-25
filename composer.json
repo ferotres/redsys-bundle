@@ -1,0 +1,29 @@
+{
+    "name": "ferotres/redsys-bundle",
+    "description": "A simple Pay system with redsys",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Toni Fernandez",
+            "email": "toni.fernandez@gmx.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ferotres\\RedsysBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ferotres\\RedsysBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1.3",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
