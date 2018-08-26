@@ -176,13 +176,25 @@ abstract class Redsys
     protected function getCorrespondenceIdCurrency(string $isoCurrency) :?string
     {
         $currencies = [
-            'EUR' => '978',
-            'USD' => '840',
-            'AUD' => '036',
-            'GBP' => '826'
+            'EUR' => '978', // Euros
+            'USD' => '840', // Dolares
+            'AUD' => '036', // Dolares Australianos
+            'GBP' => '826', // Libras
+            'JPY' => '392', // Yen
+            'ARS' => '032', // Peso Argentino
+            'CAD' => '124', // Dolar Canadiense
+            'INR' => '356', // Rupia
+            'MXN' => '484', // Peso Mexicano
+            'PEN' => '604', // Sol Peruano
+            'CHF' => '756', // Franco suizo
+            'BRL' => '986', // Real Brasileño
+            'VEF' => '937', // Bolivar Venezolano
+            'TRY' => '949', // Lira Turca
         ];
         return $currencies[$isoCurrency] ?? null;
     }
+
+
 
     /**
      * @param string $locale
@@ -191,14 +203,18 @@ abstract class Redsys
     protected function getCorrespondenceLanguage(string $locale):?int
     {
         $locales = [
-            'ES' => 1,
-            'EN' => 2,
-            'FR' => 4,
-            'DE' => 5,
-            'IT' => 7,
-            'NL' => 6,
-            'EL' => 2,
-            'RU' => 2,
+            'ES' => 1,  // Castellano
+            'EN' => 2,  // Ingles
+            'CA' => 3,  // Catalán
+            'FR' => 4,  // Frances
+            'DE' => 5,  // Aleman
+            'NL' => 6,  // Holandes
+            'IT' => 7,  // Italiano
+            'SV' => 8,  // Sueco
+            'PT' => 9,  // Portugues
+            'PL' => 11, // Polaco
+            'GL' => 12, // Gallego
+            'EU' => 13, // Euskera
         ];
         return $locales[$locale] ?? null;
     }
