@@ -27,6 +27,5 @@ class FerotresRedsysExtension extends Extension
         $definition = $container->getDefinition('ferotres_redsys.redirection');
         $definition->setArgument(0, $config);
         $definition->setArgument(1, new Reference('ferotres_redsys.url_factory'));
-        $definition->setArgument(2, new Reference('ferotres_redsys.redsys_order_trace_repository'));
     }
 }

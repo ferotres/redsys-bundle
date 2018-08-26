@@ -23,23 +23,18 @@ final class RedsysController extends AbstractController
     private $redsysRedirection;
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
-    /** @var RedsysOrderTraceRepositoryInterface */
-    private $redsysOrderTraceRepository;
 
     /**
      * RedsysController constructor.
      * @param RedsysRedirection $redsysRedirection
      * @param EventDispatcherInterface $eventDispatcher
-     * @param RedsysOrderTraceRepositoryInterface $redsysOrderTraceRepository
      */
     public function __construct(
         RedsysRedirection $redsysRedirection,
-        EventDispatcherInterface $eventDispatcher,
-        RedsysOrderTraceRepositoryInterface $redsysOrderTraceRepository
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $this->redsysRedirection          = $redsysRedirection;
-        $this->eventDispatcher            = $eventDispatcher;
-        $this->redsysOrderTraceRepository = $redsysOrderTraceRepository;
+        $this->redsysRedirection = $redsysRedirection;
+        $this->eventDispatcher   = $eventDispatcher;
     }
 
     /**
@@ -69,15 +64,6 @@ final class RedsysController extends AbstractController
             $validated = $this->redsysRedirection->validatePaymentResponse($redsysResponse);
 
             $event = new RedsysResponseEvent($redsysResponse, $params, $validated);
-
-            /** @var RedsysOrderTrace $trace */
-            $trace = $this->redsysOrderTraceRepository->find($params['trace']);
-
-            $trace->setResponseCode($redsysResponse->responseCode());
-            $trace->setAuthCode($redsysResponse->authCode());
-            $trace->setValidated($validated);
-
-            $this->redsysOrderTraceRepository->save($trace);
 
             $this->eventDispatcher->dispatch(FerotresRedsysEvents::REDSYS_RESPONSE, $event);
 

@@ -28,8 +28,6 @@ final class RedsysRedirection extends Redsys
     {
         $paymentOrder->setType(PaymentOrder::BLOCK_PAYMENT);
         $redsysData  = $this->getRedsysData($paymentOrder);
-        $trace       = $this->registerOrder($redsysData, $paymentOrder);
-        $redsysData['DS_MERCHANT_MERCHANTURL'] .= '&trace='.$trace->getId();
         $redsysOrder = $this->getRedsysOrder($redsysData);
         return $redsysOrder;
     }
@@ -81,8 +79,6 @@ final class RedsysRedirection extends Redsys
     {
         $paymentOrder->setType(PaymentOrder::DIRECT_PAYMENT);
         $redsysData  = $this->getRedsysData($paymentOrder);
-        $trace          = $this->registerOrder($redsysData, $paymentOrder);
-        $redsysData['DS_MERCHANT_MERCHANTURL'] .= '&trace='.$trace->getId();
         $redsysOrder = $this->getRedsysOrder($redsysData);
         return $redsysOrder;
     }
@@ -117,8 +113,6 @@ final class RedsysRedirection extends Redsys
     protected function sendRequest(PaymentOrder $paymentOrder)
     {
         $redsysData     = $this->getRedsysData($paymentOrder);
-        $trace          = $this->registerOrder($redsysData, $paymentOrder);
-        $redsysData['DS_MERCHANT_MERCHANTURL'] .= '&trace='.$trace->getId();
         $redsysOrder    = $this->getRedsysOrder($redsysData);
 
         $client = new Client();
@@ -164,25 +158,5 @@ final class RedsysRedirection extends Redsys
         }
 
         return $redsysData;
-    }
-
-    /**
-     * @param array $redsysData
-     * @param PaymentOrder $paymentOrder
-     * @return RedsysOrderTrace
-     */
-    public function registerOrder(array $redsysData, PaymentOrder $paymentOrder)
-    {
-        $trace = new RedsysOrderTrace();
-        $trace->setAmount($redsysData['DS_MERCHANT_AMOUNT']);
-        $trace->setCes($paymentOrder->ces());
-        $trace->setCurrency($redsysData['DS_MERCHANT_CURRENCY']);
-        $trace->setOrderNumber($redsysData['DS_MERCHANT_ORDER']);
-        $trace->setOrderType($redsysData['DS_MERCHANT_TRANSACTION_TYPE']);
-        $trace->setShop($paymentOrder->app());
-        $trace->setTerminal($redsysData['DS_MERCHANT_TERMINAL']);
-
-        $this->redsysOrderTraceRepository->save($trace);
-        return $trace;
     }
 }

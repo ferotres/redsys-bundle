@@ -34,25 +34,20 @@ abstract class Redsys
     protected $notification;
     /** @var array */
     protected $terminal;
-    /** @var RedsysOrderTraceRepositoryInterface */
-    protected $redsysOrderTraceRepository;
 
     /**
      * Redsys constructor.
      * @param array $config
      * @param UrlFactory $urlFactory
-     * @param RedsysOrderTraceRepositoryInterface $redsysOrderTraceRepository
      */
     public function __construct(
         array $config = [],
-        UrlFactory $urlFactory,
-        RedsysOrderTraceRepositoryInterface $redsysOrderTraceRepository
+        UrlFactory $urlFactory
     ) {
-        $this->redsysHelper               = new RedsysHelper();
-        $this->urlFactory                 = $urlFactory;
-        $this->url                        = $config['url'];
-        $this->apps                       = $config['shops'];
-        $this->redsysOrderTraceRepository = $redsysOrderTraceRepository;
+        $this->redsysHelper = new RedsysHelper();
+        $this->urlFactory   = $urlFactory;
+        $this->url          = $config['url'];
+        $this->apps         = $config['shops'];
     }
 
     /**
@@ -229,7 +224,6 @@ abstract class Redsys
         try {
             $this->successUrl   = $this->urlFactory->generateUrl($app['success'], $paymentOrder->routeParams());
             $this->errorUrl     = $this->urlFactory->generateUrl($app['error'], $paymentOrder->routeParams());
-
             $this->notification = $this->urlFactory->generateUrl(
                 'ferotres_redsys_notification_url',
                 array_merge($paymentOrder->routeParams(), ['app' => $paymentOrder->app()])
