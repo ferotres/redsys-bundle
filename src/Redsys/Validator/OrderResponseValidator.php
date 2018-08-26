@@ -2,8 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys\Validator;
 
-use Ferotres\RedsysBundle\Redsys\AuthorizationValidator;
-use Ferotres\RedsysBundle\Redsys\ConfirmationValidator;
 use Ferotres\RedsysBundle\Redsys\Exception\InvalidResponseSignature;
 use Ferotres\RedsysBundle\Redsys\Exception\ResponseValidationException;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
