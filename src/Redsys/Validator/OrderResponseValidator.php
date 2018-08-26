@@ -35,12 +35,10 @@ final class OrderResponseValidator
     public function validate(RedsysResponse $redsysResponse) :bool
     {
         $this->isValidSignature($redsysResponse);
-
-        $serviceDefinition = $this->getValidatorService($redsysResponse->type());
-        /** @var OrderResponseValidator $service */
-        $service   = new $serviceDefinition($this->redsysRedirection);
-        $validated = $service->validate($redsysResponse);
-        return true;
+        $validatorDefinition = $this->getValidatorService($redsysResponse->type());
+        /** @var OrderResponseValidatorInterface $validator */
+        $validator = new $validatorDefinition;
+        return $validator->validate($redsysResponse);
     }
 
     /**
@@ -50,17 +48,17 @@ final class OrderResponseValidator
      */
     private function getValidatorService($orderType)
     {
-        $services = [
+        $validators = [
             'O' => AuthorizationValidator::class,
             '0' => DirectPaymentValidator::class,
             'P' => ConfirmationValidator::class,
             'Q' => CancelAuthorizationValidator::class
         ];
-        $service = $services[$orderType] ?? null;
-        if (!$service) {
+        $validator = $validators[$orderType] ?? null;
+        if (!$validator) {
             throw new ResponseValidationException("Validator not exist for this order");
         }
-        return $service;
+        return $validator;
     }
 
     /**
@@ -71,8 +69,7 @@ final class OrderResponseValidator
      */
     private function isValidSignature(RedsysResponse $redsysResponse)
     {
-        $valid = $this->redsysRedirection->validatePaymentResponse($redsysResponse);
-        if (!$valid) {
+        if (!$this->redsysRedirection->validatePaymentResponse($redsysResponse)) {
             throw new InvalidResponseSignature("The signature of response is diferent that expected!");
         }
     }

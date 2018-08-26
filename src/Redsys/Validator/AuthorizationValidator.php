@@ -2,7 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys;
 
-use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 use Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidatorInterface;
 
 /**
@@ -11,19 +10,6 @@ use Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidatorInterface;
  */
 final class AuthorizationValidator implements OrderResponseValidatorInterface
 {
-    /**
-     * @var RedsysRedirection
-     */
-    private $redsysRedirection;
-
-    /**
-     * AuthorizationValidator constructor.
-     * @param RedsysRedirection $redsysRedirection
-     */
-    public function __construct(RedsysRedirection $redsysRedirection)
-    {
-        $this->redsysRedirection = $redsysRedirection;
-    }
 
     /**
      * @param RedsysResponse $redsysResponse

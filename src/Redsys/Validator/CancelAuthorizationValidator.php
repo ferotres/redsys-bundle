@@ -3,7 +3,6 @@
 namespace Ferotres\RedsysBundle\Redsys\Validator;
 
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
-use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 
 /**
  * Class CancelAuthorizationValidator
@@ -11,19 +10,6 @@ use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
  */
 final class CancelAuthorizationValidator implements OrderResponseValidatorInterface
 {
-    /**
-     * @var RedsysRedirection
-     */
-    private $redsysRedirection;
-
-    /**
-     * CancelAuthorizationValidator constructor.
-     * @param RedsysRedirection $redsysRedirection
-     */
-    public function __construct(RedsysRedirection $redsysRedirection)
-    {
-        $this->redsysRedirection = $redsysRedirection;
-    }
 
     /**
      * @param RedsysResponse $redsysResponse

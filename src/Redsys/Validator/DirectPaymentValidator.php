@@ -9,7 +9,6 @@
 namespace Ferotres\RedsysBundle\Redsys\Validator;
 
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
-use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 
 /**
  * Class DirectPaymentValidator
@@ -17,17 +16,6 @@ use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
  */
 class DirectPaymentValidator implements OrderResponseValidatorInterface
 {
-    /**
-     * @var RedsysRedirection
-     */
-    private $redsysRedirection;
-
-    public function __construct(RedsysRedirection $redsysRedirection)
-    {
-        $this->redsysRedirection = $redsysRedirection;
-    }
-
-
     public function validate(RedsysResponse $redsysResponse): bool
     {
         $valid = false;
