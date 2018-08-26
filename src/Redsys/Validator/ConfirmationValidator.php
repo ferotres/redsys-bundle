@@ -1,8 +1,8 @@
 <?php
 
-namespace Ferotres\RedsysBundle\Redsys;
+namespace Ferotres\RedsysBundle\Redsys\Validator;
 
-use Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidatorInterface;
+use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 
 /**
  * Class ConfirmationValidator

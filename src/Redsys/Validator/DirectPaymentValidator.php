@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: antonio
- * Date: 26/08/18
- * Time: 17:30
- */
 
 namespace Ferotres\RedsysBundle\Redsys\Validator;
 
