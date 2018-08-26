@@ -28,6 +28,15 @@
         >
             <argument type="service" id="ferotres_redsys.redirection" />
             <argument type="service" id="debug.event_dispatcher.inner" />
+            <argument type="service" id="ferotres_redsys.order_response_validator" />
+        </service>
+
+        <service
+                id="ferotres_redsys.order_response_validator"
+                class="Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidator"
+                public="true"
+        >
+            <argument type="service" id="ferotres_redsys.redirection" />
         </service>
 
     </services>

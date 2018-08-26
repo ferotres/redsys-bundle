@@ -5,6 +5,7 @@ namespace Ferotres\RedsysBundle\Redsys\Validator;
 use Ferotres\RedsysBundle\Redsys\AuthorizationValidator;
 use Ferotres\RedsysBundle\Redsys\ConfirmationValidator;
 use Ferotres\RedsysBundle\Redsys\Exception\InvalidResponseSignature;
+use Ferotres\RedsysBundle\Redsys\Exception\ResponseValidationException;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 
@@ -57,7 +58,7 @@ final class OrderResponseValidator
         ];
         $service = $services[$orderType] ?? null;
         if (!$service) {
-            throw new \Exception("Validator not exist for this order");
+            throw new ResponseValidationException("Validator not exist for this order");
         }
         return $service;
     }

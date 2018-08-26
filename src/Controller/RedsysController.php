@@ -5,8 +5,10 @@ use Ferotres\RedsysBundle\Entity\RedsysOrderTrace;
 use Ferotres\RedsysBundle\FerotresRedsysEvents;
 use Ferotres\RedsysBundle\Event\RedsysResponseEvent;
 use Ferotres\RedsysBundle\Event\RedsysResponseFailedEvent;
+use Ferotres\RedsysBundle\Redsys\Exception\PaymentFailureException;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
+use Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidator;
 use Ferotres\RedsysBundle\Repository\RedsysOrderTraceRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -23,18 +25,23 @@ final class RedsysController extends AbstractController
     private $redsysRedirection;
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+    /** @var OrderResponseValidator */
+    private $orderResponseValidator;
 
     /**
      * RedsysController constructor.
      * @param RedsysRedirection $redsysRedirection
      * @param EventDispatcherInterface $eventDispatcher
+     * @param OrderResponseValidator $orderResponseValidator
      */
     public function __construct(
         RedsysRedirection $redsysRedirection,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        OrderResponseValidator $orderResponseValidator
     ) {
-        $this->redsysRedirection = $redsysRedirection;
-        $this->eventDispatcher   = $eventDispatcher;
+        $this->redsysRedirection      = $redsysRedirection;
+        $this->eventDispatcher        = $eventDispatcher;
+        $this->orderResponseValidator = $orderResponseValidator;
     }
 
     /**
@@ -61,7 +68,11 @@ final class RedsysController extends AbstractController
                 $request->get("Ds_MerchantParameters"),
                 $params['app']
             );
-            $validated = $this->redsysRedirection->validatePaymentResponse($redsysResponse);
+            $validated = $this->orderResponseValidator->validate($redsysResponse);
+
+            if (!$validated) {
+                throw new PaymentFailureException("Payment failure!");
+            }
 
             $event = new RedsysResponseEvent($redsysResponse, $params, $validated);
 
