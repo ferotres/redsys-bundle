@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Event;
  * Class RedsysResponseEvent
  * @package Ferotres\RedsysBundle\Event
  */
-final class RedsysResponseEvent extends Event
+final class RedsysResponseSuccessEvent extends Event
 {
     /** @var RedsysResponse */
     private $redsysResponse;

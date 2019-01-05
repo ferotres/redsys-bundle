@@ -1,9 +1,9 @@
 <?php
 
 namespace Ferotres\RedsysBundle\Controller;
-use Ferotres\RedsysBundle\Entity\RedsysOrderTrace;
+
 use Ferotres\RedsysBundle\FerotresRedsysEvents;
-use Ferotres\RedsysBundle\Event\RedsysResponseEvent;
+use Ferotres\RedsysBundle\Event\RedsysResponseSuccessEvent;
 use Ferotres\RedsysBundle\Event\RedsysResponseFailedEvent;
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentFailureException;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
@@ -74,9 +74,9 @@ final class RedsysController extends AbstractController
                 throw new PaymentFailureException("Payment failure!");
             }
 
-            $event = new RedsysResponseEvent($redsysResponse, $params, $validated);
+            $event = new RedsysResponseSuccessEvent($redsysResponse, $params, $validated);
 
-            $this->eventDispatcher->dispatch(FerotresRedsysEvents::REDSYS_RESPONSE, $event);
+            $this->eventDispatcher->dispatch(FerotresRedsysEvents::REDSYS_RESPONSE_SUCCESS, $event);
 
 
         } catch (\Throwable $exception) {

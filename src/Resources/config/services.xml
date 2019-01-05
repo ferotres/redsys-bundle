@@ -12,6 +12,7 @@
             public="true"
         />
 
+        <service id="Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection" alias="ferotres_redsys.redirection" />
 
         <service
             id="ferotres_redsys.url_factory"
