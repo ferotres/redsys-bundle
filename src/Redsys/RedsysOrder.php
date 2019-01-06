@@ -46,6 +46,11 @@ final class RedsysOrder
         return $this->version;
     }
 
+    public function url(): string
+    {
+        return $this->url:
+    }
+
     /**
      * @return string
      */
