@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Ferotres\\RedsysBundle\\Tests\\": "tests/"
+            "Ferotres\\RedsysBundle\\Tests\\": "src/tests/"
         }
     },
     "require": {

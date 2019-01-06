@@ -2,8 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys;
 
-use Ferotres\RedsysBundle\Entity\Payment;
-
 /**
  * Class RedsysFormData
  * @package CoreBiz\Redsys
@@ -18,8 +16,6 @@ final class RedsysOrder
     private $signature;
     /** @var string  */
     private $orderData;
-    /** @var  Payment */
-    private $payment;
 
     /**
      * RedsysFormData constructor.
@@ -34,14 +30,6 @@ final class RedsysOrder
         $this->version   = $version;
         $this->signature = $signature;
         $this->orderData = $orderData;
-    }
-
-    /**
-     * @return string
-     */
-    public function url(): string
-    {
-        return $this->url;
     }
 
     /**
@@ -69,22 +57,6 @@ final class RedsysOrder
     }
 
     /**
-     * @return Payment
-     */
-    public function payment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * @param Payment $payment
-     */
-    public function setPayment(Payment $payment)
-    {
-        $this->payment = $payment;
-    }
-
-    /**
      * @return array
      */
     public function toArray(): array
@@ -97,20 +69,6 @@ final class RedsysOrder
             ],
             'url' => $this->url
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function toHtmlForm(): string
-    {
-        $form  = '<form id="redsys_pay_form" onload="alert(\'hola\');" method="POST" action="'.$this->url().'">';
-        $form .= '<input type="hidden" name="Ds_SignatureVersion" value="'.$this->version().'"/>';
-        $form .= '<input type="hidden" name="Ds_MerchantParameters" value="'.$this->orderData().'"/>';
-        $form .= '<input type="hidden" name="Ds_Signature" value="'.$this->signature().'"/>';
-        $form .= '</form>';
-        $form .= '<script type="application/x-javascript">window.onload = function() {document.getElementById("redsys_pay_form").submit();}</script>';
-        return $form;
     }
 
 }

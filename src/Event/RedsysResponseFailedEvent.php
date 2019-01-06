@@ -65,4 +65,9 @@ final class RedsysResponseFailedEvent  extends Event
     {
         return $this->exception;
     }
+
+    public function redsysResponse():?RedsysResponse
+    {
+        return $this->redsysResponse;
+    }
 }

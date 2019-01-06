@@ -89,21 +89,8 @@ final class RedsysHelper
      */
     public function mac256($ent,$key)
     {
-        $res = hash_hmac('sha256', $ent, $key, true);//(PHP 5 >= 5.1.2)
+        $res = hash_hmac('sha256', $ent, $key, true);
         return $res;
-    }
-
-
-    /**
-     * @param $data
-     * @return bool|string
-     */
-    function getXmlOrder($data)
-    {
-        $posPedidoIni = strrpos($data, "<DS_MERCHANT_ORDER>");
-        $tamPedidoIni = strlen("<DS_MERCHANT_ORDER>");
-        $posPedidoFin = strrpos($data, "</DS_MERCHANT_ORDER>");
-        return substr($data,$posPedidoIni + $tamPedidoIni,$posPedidoFin - ($posPedidoIni + $tamPedidoIni));
     }
 
     /**
@@ -119,23 +106,4 @@ final class RedsysHelper
         return $this->encodeBase64($res);
     }
 
-    /**
-     * @param array $data
-     * @param string $root
-     * @return string
-     */
-    public function arrayToXml(array $data, string $root)
-    {
-        $xml = "<".$root.">";
-        foreach ($data as $key => $value){
-            if(is_array($value)){
-                $xml .= $this->arrayToXml($value, $key);
-            }
-            else{
-                $xml .= "<".$key.">".$value."</".$key.">";
-            }
-        }
-        $xml .= "</".$root.">";
-        return $xml;
-    }
 }

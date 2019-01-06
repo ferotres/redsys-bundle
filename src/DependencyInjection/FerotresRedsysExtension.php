@@ -15,7 +15,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class FerotresRedsysExtension extends Extension
 {
-
+    /**
+     * @param array $configs
+     * @param ContainerBuilder $container
+     * @throws \Exception
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -25,7 +29,8 @@ class FerotresRedsysExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $definition = $container->getDefinition('ferotres_redsys.redirection');
-        $definition->setArgument(0, $config);
-        $definition->setArgument(1, new Reference('ferotres_redsys.url_factory'));
+        $definition->setArgument(0, new Reference('ferotres_redsys.url_factory'));
+        $definition->setArgument(1, $config);
+
     }
 }

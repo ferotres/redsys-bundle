@@ -62,7 +62,7 @@ final class PaymentOrderBuilder
             $this->paymentOrderData['description'],
             $this->paymentOrderData['authCode'],
             $this->paymentOrderData['ces'],
-            $this->paymentOrderData['routeParams']
+            $this->paymentOrderData['userParams']
         );
     }
 
@@ -120,9 +120,9 @@ final class PaymentOrderBuilder
         return $this;
     }
 
-    public function addRouteParams(array $routeParams)
+    public function addUserParams(array $userParams)
     {
-        $this->paymentOrderData['routeParams'] = $routeParams;
+        $this->paymentOrderData['userParams'] = $userParams;
         return $this;
     }
 

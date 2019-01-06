@@ -15,13 +15,16 @@
 
     <testsuites>
         <testsuite name="Test suite">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">./src/tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src</directory>
+            <directory suffix=".php" >./src</directory>
+            <exclude>
+                <directory>./src/tests</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>

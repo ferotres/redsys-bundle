@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * Class UrlFactory
  * @package Ferotres\RedsysBundle\Redsys\Services
  */
-final class UrlFactory
+final class UrlFactory implements UrlFactoryInterface
 {
 
     /**

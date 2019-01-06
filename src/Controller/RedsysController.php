@@ -9,7 +9,6 @@ use Ferotres\RedsysBundle\Redsys\Exception\PaymentFailureException;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 use Ferotres\RedsysBundle\Redsys\Validator\OrderResponseValidator;
-use Ferotres\RedsysBundle\Repository\RedsysOrderTraceRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,11 +80,11 @@ final class RedsysController extends AbstractController
 
         } catch (\Throwable $exception) {
 
-            if(!$redsysResponse instanceof RedsysResponse) {
+            if (!$redsysResponse instanceof RedsysResponse) {
                 $redsysResponse = null;
             }
 
-            if(!is_array($params)) {
+            if (!is_array($params)) {
                 $params = [];
             }
 

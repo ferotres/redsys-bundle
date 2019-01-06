@@ -7,7 +7,8 @@ use Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException;
 use Ferotres\RedsysBundle\Redsys\Exception\RedsysException;
 use Ferotres\RedsysBundle\Redsys\Helper\RedsysHelper;
 use Ferotres\RedsysBundle\Redsys\Services\UrlFactory;
-use Ferotres\RedsysBundle\Repository\RedsysOrderTraceRepositoryInterface;
+use Ferotres\RedsysBundle\Redsys\Services\UrlFactoryInterface;
+use GuzzleHttp\Client;
 
 /**
  * Class Redsys
@@ -34,20 +35,27 @@ abstract class Redsys
     protected $notification;
     /** @var array */
     protected $terminal;
+    /** @var Client */
+    protected $client;
 
     /**
      * Redsys constructor.
+     * @param UrlFactoryInterface $urlFactory
      * @param array $config
-     * @param UrlFactory $urlFactory
      */
     public function __construct(
+        UrlFactoryInterface $urlFactory,
         array $config = [],
-        UrlFactory $urlFactory
+        ?Client $client = null
     ) {
         $this->redsysHelper = new RedsysHelper();
         $this->urlFactory   = $urlFactory;
         $this->url          = $config['url'];
         $this->apps         = $config['shops'];
+        $this->client       = $client;
+        if (!$client) {
+            $this->client = new Client();
+        }
     }
 
     /**

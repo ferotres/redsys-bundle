@@ -2,7 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys\Services;
 
-use Ferotres\RedsysBundle\Entity\RedsysOrderTrace;
 use Ferotres\RedsysBundle\Redsys\Exception\RedsysException;
 use Ferotres\RedsysBundle\Redsys\PaymentOrder;
 use Ferotres\RedsysBundle\Redsys\Redsys;
@@ -24,7 +23,7 @@ final class RedsysRedirection extends Redsys
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
      */
-    function createAuthorization(PaymentOrder $paymentOrder)
+    public function createAuthorization(PaymentOrder $paymentOrder)
     {
         $paymentOrder->setType(PaymentOrder::BLOCK_PAYMENT);
         $redsysData  = $this->getRedsysData($paymentOrder);
@@ -38,8 +37,9 @@ final class RedsysRedirection extends Redsys
      * @throws RedsysException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    function confirmAuthorization(PaymentOrder $paymentOrder)
+    public function confirmAuthorization(PaymentOrder $paymentOrder)
     {
         if (!$paymentOrder->authCode()) {
             throw new RedsysException("For confirm authorization, authCode is required");
@@ -56,8 +56,9 @@ final class RedsysRedirection extends Redsys
      * @throws RedsysException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    function cancelAuthorization(PaymentOrder $paymentOrder)
+    public function cancelAuthorization(PaymentOrder $paymentOrder)
     {
         if (!$paymentOrder->authCode()) {
             throw new RedsysException("For cancel authorization, authCode is required");
@@ -109,14 +110,14 @@ final class RedsysRedirection extends Redsys
      * @throws RedsysException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function sendRequest(PaymentOrder $paymentOrder)
     {
         $redsysData     = $this->getRedsysData($paymentOrder);
         $redsysOrder    = $this->getRedsysOrder($redsysData);
 
-        $client = new Client();
-        return $client->request('POST', $this->url, ['form_params' => $redsysOrder->toArray()['formData'] ]);
+        return $this->client->request('POST', $this->url, ['form_params' => $redsysOrder->toArray()['formData'] ]);
     }
 
     /**
