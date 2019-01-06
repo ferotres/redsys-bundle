@@ -1,6 +1,6 @@
 {
     "name": "ferotres/redsys-bundle",
-    "description": "A simple Pay system with redsys",
+    "description": "The FerotresRedsysBundle adds support for manage payments in redsys platform for Symfony4.",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
