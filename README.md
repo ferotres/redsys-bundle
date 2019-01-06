@@ -3,7 +3,7 @@ FerotresRedsysBundle
 
 The FerotresRedsysBundle adds support for manage payments in redsys platform for Symfony4.
 
-Features include:
+**Features include**:
 
 - Multi currency | Language
 - Multi shops
@@ -21,24 +21,22 @@ Features include:
 Installation
 ------------
 
-1. Download FerotresRedsysBundle.
-2. Add routing resource.
-3. Configure the FerotresRedsysBundle.
-
-Downoad FerotresRedsysBundle
+1. **Download FerotresRedsysBundle**.
 
 ``` bash
 $ composer require ferotres/redsys-bundle
 ```
 
-Add routing resource
+2. **Add routing resource**.
 ``` yaml
 # config/routes/ferotres_redsys.yaml
 _ferotres_redsys:
     resource: "@FerotresRedsysBundle/Resources/config/routes.xml"
 ```
 
-Configure the FerotresRedsysBundle
+3. **Configure the FerotresRedsysBundle**.
+
+You can configure the bundle for each environment.
 ``` yaml
 # config/packages/ferotres_redsys.yaml
 ferotres_redsys:
