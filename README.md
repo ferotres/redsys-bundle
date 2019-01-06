@@ -18,7 +18,7 @@ The FerotresRedsysBundle adds support for manage payments in redsys platform for
 
 **Note:** This bundle does *not* provide entities for manage payments.
 
-[![Latest Stable Version](https://poser.pugx.org/ferotres/redsys-bundle/v/stable)](https://packagist.org/packages/ferotres/redsys-bundle) [![Total Downloads](https://poser.pugx.org/ferotres/redsys-bundle/downloads)](https://packagist.org/packages/ferotres/redsys-bundle) [![Latest Unstable Version](https://poser.pugx.org/ferotres/redsys-bundle/v/unstable)](https://packagist.org/packages/ferotres/redsys-bundle) [![License](https://poser.pugx.org/ferotres/redsys-bundle/license)](https://packagist.org/packages/ferotres/redsys-bundle)
+[![Build Status](https://travis-ci.org/ferotres/redsys-bundle.svg?branch=master)](https://travis-ci.org/ferotres/redsys-bundle) [![Latest Stable Version](https://poser.pugx.org/ferotres/redsys-bundle/v/stable)](https://packagist.org/packages/ferotres/redsys-bundle) [![Total Downloads](https://poser.pugx.org/ferotres/redsys-bundle/downloads)](https://packagist.org/packages/ferotres/redsys-bundle) [![Latest Unstable Version](https://poser.pugx.org/ferotres/redsys-bundle/v/unstable)](https://packagist.org/packages/ferotres/redsys-bundle) [![License](https://poser.pugx.org/ferotres/redsys-bundle/license)](https://packagist.org/packages/ferotres/redsys-bundle)
 
 Installation
 ------------
