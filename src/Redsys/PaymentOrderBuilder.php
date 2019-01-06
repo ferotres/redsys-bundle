@@ -23,7 +23,7 @@ final class PaymentOrderBuilder
      */
     private function __construct()
     {
-        $this->paymentOrderData = array(
+        $this->paymentOrderData = [
             'app' => null,
             'currency' => 'EUR',
             'locale' => 'ES',
@@ -33,8 +33,8 @@ final class PaymentOrderBuilder
             'description' => '',
             'authCode' => null,
             'ces' => false,
-            'userParams' => array(),
-        );
+            'userParams' => [],
+        ];
     }
 
     /**

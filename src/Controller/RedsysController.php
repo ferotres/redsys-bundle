@@ -89,7 +89,7 @@ final class RedsysController extends AbstractController
             }
 
             if (!is_array($params)) {
-                $params = array();
+                $params = [];
             }
 
             $event = new RedsysResponseFailedEvent($redsysResponse, $params, $validated, $exception);

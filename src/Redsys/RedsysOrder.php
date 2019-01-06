@@ -67,13 +67,13 @@ final class RedsysOrder
      */
     public function toArray(): array
     {
-        return array(
-            'formData' => array(
+        return [
+            'formData' => [
                 'Ds_SignatureVersion' => $this->version(),
                 'Ds_MerchantParameters' => $this->orderData(),
                 'Ds_Signature' => $this->signature(),
-            ),
+            ],
             'url' => $this->url,
-        );
+        ];
     }
 }

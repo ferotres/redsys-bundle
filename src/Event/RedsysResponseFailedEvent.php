@@ -35,7 +35,7 @@ final class RedsysResponseFailedEvent extends Event
      */
     public function __construct(
         ?RedsysResponse $redsysResponse,
-        array $params = array(),
+        array $params = [],
         bool $validated = false,
         \Throwable $exception = null
     ) {

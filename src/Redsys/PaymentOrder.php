@@ -15,8 +15,8 @@ use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
  */
 final class PaymentOrder
 {
-    const VALID_CURRENCIES = array('EUR', 'USD', 'GBP', 'AUD');
-    const VALID_LOCALES = array('ES', 'EN', 'IT', 'NL', 'DE', 'FR', 'EL', 'RU');
+    const VALID_CURRENCIES = ['EUR', 'USD', 'GBP', 'AUD'];
+    const VALID_LOCALES = ['ES', 'EN', 'IT', 'NL', 'DE', 'FR', 'EL', 'RU'];
 
     /** Order types */
     const BLOCK_PAYMENT = 'O';
@@ -74,7 +74,7 @@ final class PaymentOrder
         string $description,
         string $authCode = null,
         bool   $ces = false,
-        array  $routeParams = array()
+        array  $routeParams = []
     ) {
         $this->app = $app;
         $this->currency = strtoupper($currency);
@@ -115,7 +115,7 @@ final class PaymentOrder
         string $description,
         string $authCode = null,
         bool   $ces = false,
-        array  $routeParams = array()
+        array  $routeParams = []
     ) {
         return new self($app, $currency, $locale, $order, $amount, $titular, $description, $authCode, $ces, $routeParams);
     }

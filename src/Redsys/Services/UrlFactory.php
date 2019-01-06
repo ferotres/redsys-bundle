@@ -25,7 +25,7 @@ final class UrlFactory implements UrlFactoryInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function generateUrl(string $route, array $params = array())
+    public function generateUrl(string $route, array $params = [])
     {
         return $this->urlGenerator->generate($route, $params, 0);
     }

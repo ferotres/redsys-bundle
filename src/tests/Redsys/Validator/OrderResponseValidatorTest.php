@@ -230,7 +230,7 @@ class OrderResponseValidatorTest extends TestCase
      */
     private function getBasicResponseData(): array
     {
-        return array(
+        return [
             'Ds_Response' => '0000',
             'Ds_Order' => '123456',
             'Ds_Card_Country' => 910,
@@ -238,6 +238,6 @@ class OrderResponseValidatorTest extends TestCase
             'Ds_MerchantCode' => '123456',
             'Ds_TransactionType' => 'O',
             'Ds_Terminal' => 1,
-        );
+        ];
     }
 }

@@ -13,5 +13,5 @@ namespace Ferotres\RedsysBundle\Redsys\Services;
  */
 interface UrlFactoryInterface
 {
-    public function generateUrl(string $route, array $params = array());
+    public function generateUrl(string $route, array $params = []);
 }

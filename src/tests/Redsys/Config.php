@@ -18,20 +18,20 @@ class Config
      */
     public static function getConfig(): array
     {
-        return array(
+        return [
             'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago',
-            'shops' => array(
-                'test' => array(
+            'shops' => [
+                'test' => [
                     'merchant_name' => 'AppTest',
                     'merchant_code' => '123456',
                     'success' => 'success',
                     'error' => 'error',
-                    'terminals' => array(
-                        array('secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => true,  'num' => 1, 'iso_currency' => 'EUR'),
-                        array('secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => false, 'num' => 2, 'iso_currency' => 'EUR'),
-                    ),
-                ),
-            ),
-        );
+                    'terminals' => [
+                        ['secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => true,  'num' => 1, 'iso_currency' => 'EUR'],
+                        ['secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => false, 'num' => 2, 'iso_currency' => 'EUR'],
+                    ],
+                ],
+            ],
+        ];
     }
 }

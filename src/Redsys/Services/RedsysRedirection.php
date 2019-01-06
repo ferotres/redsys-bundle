@@ -137,7 +137,7 @@ final class RedsysRedirection extends Redsys
         $redsysData = $this->getRedsysData($paymentOrder);
         $redsysOrder = $this->getRedsysOrder($redsysData);
 
-        return $this->client->request('POST', $this->url, array('form_params' => $redsysOrder->toArray()['formData']));
+        return $this->client->request('POST', $this->url, ['form_params' => $redsysOrder->toArray()['formData']]);
     }
 
     /**
@@ -171,12 +171,12 @@ final class RedsysRedirection extends Redsys
         $redsysData['DS_MERCHANT_MERCHANTURL'] = $this->notification;
         $redsysData['DS_MERCHANT_CONSUMERLANGUAGE'] = $language;
 
-        if (!in_array($paymentOrder->type(), array(paymentOrder::CONFIRM_PAYMENT, paymentOrder::CANCEL_PAYMENT))) {
+        if (!in_array($paymentOrder->type(), [paymentOrder::CONFIRM_PAYMENT, paymentOrder::CANCEL_PAYMENT])) {
             $redsysData['DS_MERCHANT_URLOK'] = $this->successUrl;
             $redsysData['DS_MERCHANT_URLKO'] = $this->errorUrl;
         }
 
-        if (in_array($paymentOrder->type(), array(paymentOrder::CONFIRM_PAYMENT, paymentOrder::CANCEL_PAYMENT))) {
+        if (in_array($paymentOrder->type(), [paymentOrder::CONFIRM_PAYMENT, paymentOrder::CANCEL_PAYMENT])) {
             $redsysData['DS_MERCHANT_AUTHORISATIONCODE'] = $paymentOrder->authCode();
         }
 

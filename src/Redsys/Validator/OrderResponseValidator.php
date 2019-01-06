@@ -57,12 +57,12 @@ final class OrderResponseValidator
      */
     private function getValidatorService($orderType)
     {
-        $validators = array(
+        $validators = [
             'O' => AuthorizationValidator::class,
             '0' => DirectPaymentValidator::class,
             'P' => ConfirmationValidator::class,
             'Q' => CancelAuthorizationValidator::class,
-        );
+        ];
         $validator = $validators[$orderType] ?? null;
         if (!$validator) {
             throw new ResponseValidationException('Validator not exist for this order');

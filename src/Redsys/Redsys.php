@@ -51,7 +51,7 @@ abstract class Redsys
      */
     public function __construct(
         UrlFactoryInterface $urlFactory,
-        array $config = array(),
+        array $config = [],
         ?Client $client = null
     ) {
         $this->redsysHelper = new RedsysHelper();
@@ -109,7 +109,7 @@ abstract class Redsys
 
         $this->setOrderUrl($app, $paymentOrder);
 
-        return array(
+        return [
             'DS_MERCHANT_AMOUNT' => (string) $paymentOrder->amount(),
             'DS_MERCHANT_CURRENCY' => $currency,
             'DS_MERCHANT_ORDER' => $paymentOrder->order(),
@@ -119,7 +119,7 @@ abstract class Redsys
             'DS_MERCHANT_TERMINAL' => $this->terminal['num'],
             'DS_MERCHANT_TRANSACTION_TYPE' => $paymentOrder->type(),
             'DS_MERCHANT_PRODUCTDESCRIPTION' => $paymentOrder->description(),
-        );
+        ];
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class Redsys
      */
     protected function getApp($appName = null): array
     {
-        $app = array();
+        $app = [];
         $appsCount = count($this->apps);
         if ($appsCount > 1 && $appName) {
             $app = $this->apps[$appName];
@@ -199,7 +199,7 @@ abstract class Redsys
      */
     protected function getCorrespondenceIdCurrency(string $isoCurrency): ?string
     {
-        $currencies = array(
+        $currencies = [
             'EUR' => '978', // Euros
             'USD' => '840', // Dolares
             'AUD' => '036', // Dolares Australianos
@@ -214,7 +214,7 @@ abstract class Redsys
             'BRL' => '986', // Real Brasileño
             'VEF' => '937', // Bolivar Venezolano
             'TRY' => '949', // Lira Turca
-        );
+        ];
 
         return $currencies[$isoCurrency] ?? null;
     }
@@ -226,7 +226,7 @@ abstract class Redsys
      */
     protected function getCorrespondenceLanguage(string $locale): ?int
     {
-        $locales = array(
+        $locales = [
             'ES' => 1,  // Castellano
             'EN' => 2,  // Ingles
             'CA' => 3,  // Catalán
@@ -239,7 +239,7 @@ abstract class Redsys
             'PL' => 11, // Polaco
             'GL' => 12, // Gallego
             'EU' => 13, // Euskera
-        );
+        ];
 
         return $locales[$locale] ?? null;
     }
@@ -257,7 +257,7 @@ abstract class Redsys
             $this->errorUrl = $this->urlFactory->generateUrl($app['error'], $paymentOrder->routeParams());
             $this->notification = $this->urlFactory->generateUrl(
                 'ferotres_redsys_notification_url',
-                array_merge($paymentOrder->routeParams(), array('app' => $paymentOrder->app()))
+                array_merge($paymentOrder->routeParams(), ['app' => $paymentOrder->app()])
             );
         } catch (\Throwable $exception) {
             throw new RedsysCallbackException($exception->getMessage());

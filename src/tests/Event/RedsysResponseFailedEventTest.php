@@ -21,7 +21,7 @@ class RedsysResponseFailedEventTest extends TestCase
      */
     public function whenPropertyNotExistReturnNull()
     {
-        $event = new RedsysResponseFailedEvent(null, array(), false, null);
+        $event = new RedsysResponseFailedEvent(null, [], false, null);
 
         $this->assertNull($event->getProperty());
     }
@@ -31,7 +31,7 @@ class RedsysResponseFailedEventTest extends TestCase
      */
     public function whenPropertyExistReturnValue()
     {
-        $event = new RedsysResponseFailedEvent(null, array('idOrder' => 100), false, null);
+        $event = new RedsysResponseFailedEvent(null, ['idOrder' => 100], false, null);
         $this->assertSame(100, $event->getIdOrder());
         $this->assertFalse($event->isValidated());
         $this->assertNull($event->exception());

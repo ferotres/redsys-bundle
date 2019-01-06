@@ -28,7 +28,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $loader = new FerotresRedsysExtension();
 
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array(), new ContainerBuilder());
+        $loader->load([], new ContainerBuilder());
     }
 
     /**
@@ -42,7 +42,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['merchant_name']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -56,7 +56,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['merchant_code']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -70,7 +70,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['success']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -84,7 +84,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['error']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -98,7 +98,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['terminals'][0]['secret']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -112,7 +112,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['terminals'][0]['ces']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -126,7 +126,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['terminals'][0]['num']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -140,7 +140,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $config = Config::getConfig();
         unset($config['shops']['test']['terminals'][0]['iso_currency']);
         $this->expectException(InvalidConfigurationException::class);
-        $loader->load(array($config, $config), new ContainerBuilder());
+        $loader->load([$config, $config], new ContainerBuilder());
     }
 
     /**
@@ -153,7 +153,7 @@ class FerotresRedsysExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $config = Config::getConfig();
 
-        $loader->load(array($config, $config), $container);
+        $loader->load([$config, $config], $container);
 
         $definition = $container->getDefinition('ferotres_redsys.redirection');
 

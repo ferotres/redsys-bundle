@@ -30,7 +30,7 @@ final class RedsysResponseSuccessEvent extends Event
      * @param array          $params
      * @param bool           $validated
      */
-    public function __construct(RedsysResponse $redsysResponse, array $params = array(), bool $validated = false)
+    public function __construct(RedsysResponse $redsysResponse, array $params = [], bool $validated = false)
     {
         $this->redsysResponse = $redsysResponse;
         $this->params = $params;

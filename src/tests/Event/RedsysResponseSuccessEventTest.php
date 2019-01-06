@@ -23,7 +23,7 @@ class RedsysResponseSuccessEventTest extends TestCase
      */
     public function whenPropertyNotExistReturnNull()
     {
-        $event = new RedsysResponseSuccessEvent($this->createRedsysResponse(), array(), true);
+        $event = new RedsysResponseSuccessEvent($this->createRedsysResponse(), [], true);
 
         $this->assertNull($event->getProperty());
     }
@@ -33,7 +33,7 @@ class RedsysResponseSuccessEventTest extends TestCase
      */
     public function whenPropertyExistReturnValue()
     {
-        $event = new RedsysResponseSuccessEvent($this->createRedsysResponse(), array('idOrder' => 100), true);
+        $event = new RedsysResponseSuccessEvent($this->createRedsysResponse(), ['idOrder' => 100], true);
         $this->assertSame(100, $event->getIdOrder());
         $this->assertTrue($event->isValidated());
         $this->assertInstanceOf(RedsysResponse::class, $event->redsysResponse());
@@ -57,7 +57,7 @@ class RedsysResponseSuccessEventTest extends TestCase
      */
     private function getBasicResponseData(): array
     {
-        return array(
+        return [
             'Ds_Response' => '0000',
             'Ds_Order' => '123456',
             'Ds_Card_Country' => 910,
@@ -65,6 +65,6 @@ class RedsysResponseSuccessEventTest extends TestCase
             'Ds_MerchantCode' => '123456',
             'Ds_TransactionType' => 'O',
             'Ds_Terminal' => 1,
-        );
+        ];
     }
 }
