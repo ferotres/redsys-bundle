@@ -29,7 +29,7 @@ final class PaymentOrderBuilder
             'locale' => 'ES',
             'order' => null,
             'amount' => null,
-            'titular' => '',
+            'paymentHolder' => '',
             'description' => '',
             'authCode' => null,
             'ces' => false,
@@ -65,7 +65,7 @@ final class PaymentOrderBuilder
             $this->paymentOrderData['locale'],
             $this->paymentOrderData['order'],
             $this->paymentOrderData['amount'],
-            $this->paymentOrderData['titular'],
+            $this->paymentOrderData['paymentHolder'],
             $this->paymentOrderData['description'],
             $this->paymentOrderData['authCode'],
             $this->paymentOrderData['ces'],
@@ -108,9 +108,9 @@ final class PaymentOrderBuilder
         return $this;
     }
 
-    public function withTitular(string $titular)
+    public function withPaymentHolder(string $paymentHolder)
     {
-        $this->paymentOrderData['titular'] = $titular;
+        $this->paymentOrderData['paymentHolder'] = $paymentHolder;
 
         return $this;
     }

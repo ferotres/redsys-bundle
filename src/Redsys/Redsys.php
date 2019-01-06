@@ -113,7 +113,7 @@ abstract class Redsys
             'DS_MERCHANT_AMOUNT' => (string) $paymentOrder->amount(),
             'DS_MERCHANT_CURRENCY' => $currency,
             'DS_MERCHANT_ORDER' => $paymentOrder->order(),
-            'DS_MERCHANT_TITULAR' => $paymentOrder->titular(),
+            'DS_MERCHANT_TITULAR' => $paymentOrder->paymentHolder(),
             'DS_MERCHANT_MERCHANTCODE' => $app['merchant_code'],
             'DS_MERCHANT_NAME' => $app['merchant_name'],
             'DS_MERCHANT_TERMINAL' => $this->terminal['num'],

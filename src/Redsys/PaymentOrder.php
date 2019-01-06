@@ -30,7 +30,7 @@ final class PaymentOrder
     /** @var string */
     private $currency;
     /** @var string */
-    private $titular;
+    private $paymentHolder;
     /** @var string */
     private $description;
     /** @var string */
@@ -70,7 +70,7 @@ final class PaymentOrder
         string $locale,
         string $order,
         float  $amount,
-        string $titular,
+        string $paymentHolder,
         string $description,
         string $authCode = null,
         bool   $ces = false,
@@ -80,8 +80,8 @@ final class PaymentOrder
         $this->currency = strtoupper($currency);
         $this->locale = strtoupper($locale);
         $this->order = $order;
-        $this->amount = $amount;
-        $this->titular = $titular;
+        $this->amount = $amount * 100;
+        $this->paymentHolder = $paymentHolder;
         $this->description = $description;
         $this->authCode = $authCode;
         $this->ces = $ces;
@@ -111,13 +111,13 @@ final class PaymentOrder
         string $locale,
         string $order,
         float  $amount,
-        string $titular,
+        string $paymentHolder,
         string $description,
         string $authCode = null,
         bool   $ces = false,
         array  $routeParams = []
     ) {
-        return new self($app, $currency, $locale, $order, $amount, $titular, $description, $authCode, $ces, $routeParams);
+        return new self($app, $currency, $locale, $order, $amount, $paymentHolder, $description, $authCode, $ces, $routeParams);
     }
 
     /**
@@ -139,9 +139,9 @@ final class PaymentOrder
     /**
      * @return string
      */
-    public function titular(): string
+    public function paymentHolder(): string
     {
-        return $this->titular;
+        return $this->paymentHolder;
     }
 
     /**
