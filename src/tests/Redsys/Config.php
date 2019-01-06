@@ -22,8 +22,8 @@ class Config
                     'success' => 'success',
                     'error' => 'error',
                     'terminals'  => [
-                        ['secret' => 'sq7HjrUOBfKmC576ILgskD5srU870gJ7', 'ces' => true,  'num' => 1, 'iso_currency' =>  'EUR'],
-                        ['secret' => 'sq7HjrUOBfKmC576ILgskD5srU870gJ7', 'ces' => false, 'num' => 2, 'iso_currency' =>  'EUR']
+                        ['secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => true,  'num' => 1, 'iso_currency' =>  'EUR'],
+                        ['secret' => 'sq7HprUOBfKmn576ILgskD5srU870gt8', 'ces' => false, 'num' => 2, 'iso_currency' =>  'EUR']
                     ]
                 ]
             ]
