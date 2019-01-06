@@ -7,5 +7,5 @@ cs_dry_run:
 .PHONY: cs_dry_run
 
 test:
-	./vendor/bin/phpunit
+	./vendor/bin/simple-phpunit
 .PHONY: test
