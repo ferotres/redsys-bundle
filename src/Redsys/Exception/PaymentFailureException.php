@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: antonio
- * Date: 26/08/18
- * Time: 21:09
- */
 
 namespace Ferotres\RedsysBundle\Redsys\Exception;
 
-
+/**
+ * Class PaymentFailureException
+ * @package Ferotres\RedsysBundle\Redsys\Exception
+ */
 class PaymentFailureException extends \Exception
 {
     /**

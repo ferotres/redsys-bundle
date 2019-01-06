@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: antonio
- * Date: 25/08/18
- * Time: 8:58
- */
 
 namespace Ferotres\RedsysBundle\Redsys\Services;
-
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 

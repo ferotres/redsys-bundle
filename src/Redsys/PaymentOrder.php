@@ -3,7 +3,6 @@
 namespace Ferotres\RedsysBundle\Redsys;
 
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
-use Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException;
 
 /**
  * Class PaymentOrder

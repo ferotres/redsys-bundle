@@ -2,7 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys\Exception;
 
-
 /**
  * Class PaymentOrderException
  * @package CoreBiz\Redsys\Exception

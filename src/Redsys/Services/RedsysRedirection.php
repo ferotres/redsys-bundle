@@ -7,7 +7,6 @@ use Ferotres\RedsysBundle\Redsys\PaymentOrder;
 use Ferotres\RedsysBundle\Redsys\Redsys;
 use Ferotres\RedsysBundle\Redsys\RedsysOrder;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
-use GuzzleHttp\Client;
 
 
 /**

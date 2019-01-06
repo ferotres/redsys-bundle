@@ -1,6 +1,7 @@
 <?php
 
 namespace Ferotres\RedsysBundle\Redsys;
+
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
 
 /**

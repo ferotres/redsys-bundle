@@ -2,7 +2,6 @@
 
 namespace Ferotres\RedsysBundle\Redsys\Exception;
 
-
 /**
  * Class RedsysCallbackException
  * @package CoreBiz\Redsys\Exception
