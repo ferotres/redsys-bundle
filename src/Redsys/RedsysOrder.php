@@ -48,7 +48,7 @@ final class RedsysOrder
 
     public function url(): string
     {
-        return $this->url:
+        return $this->url;
     }
 
     /**
