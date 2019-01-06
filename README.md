@@ -18,6 +18,8 @@ The FerotresRedsysBundle adds support for manage payments in redsys platform for
 
 **Note:** This bundle does *not* provide entities for manage payments.
 
+[![Build Status](https://travis-ci.org/ferotres/redsys-bundle.svg?branch=master)](https://travis-ci.org/ferotres/redsys-bundle)
+
 Installation
 ------------
 
