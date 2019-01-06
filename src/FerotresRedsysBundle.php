@@ -1,14 +1,18 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class FerotresRedsysBundle
- * @package Ferotres\RedsysBundle
+ * Class FerotresRedsysBundle.
  */
 class FerotresRedsysBundle extends Bundle
 {
-
 }

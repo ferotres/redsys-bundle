@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys\Validator;
 
 use Ferotres\RedsysBundle\Redsys\Exception\InvalidResponseSignature;
@@ -8,8 +14,7 @@ use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
 
 /**
- * Class OrderResponseValidatorResolver
- * @package Ferotres\RedsysBundle\Redsys\Validator
+ * Class OrderResponseValidatorResolver.
  */
 final class OrderResponseValidator
 {
@@ -18,6 +23,7 @@ final class OrderResponseValidator
 
     /**
      * OrderResponseValidatorResolver constructor.
+     *
      * @param RedsysRedirection $redsysRedirection
      */
     public function __construct(RedsysRedirection $redsysRedirection)
@@ -27,40 +33,47 @@ final class OrderResponseValidator
 
     /**
      * @param RedsysResponse $redsysResponse
+     *
      * @return bool
+     *
      * @throws \Exception
      */
-    public function validate(RedsysResponse $redsysResponse) :bool
+    public function validate(RedsysResponse $redsysResponse): bool
     {
         $this->isValidSignature($redsysResponse);
         $validatorDefinition = $this->getValidatorService($redsysResponse->type());
         /** @var OrderResponseValidatorInterface $validator */
-        $validator = new $validatorDefinition;
+        $validator = new $validatorDefinition();
+
         return $validator->validate($redsysResponse);
     }
 
     /**
      * @param $orderType
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     private function getValidatorService($orderType)
     {
-        $validators = [
+        $validators = array(
             'O' => AuthorizationValidator::class,
             '0' => DirectPaymentValidator::class,
             'P' => ConfirmationValidator::class,
-            'Q' => CancelAuthorizationValidator::class
-        ];
+            'Q' => CancelAuthorizationValidator::class,
+        );
         $validator = $validators[$orderType] ?? null;
         if (!$validator) {
-            throw new ResponseValidationException("Validator not exist for this order");
+            throw new ResponseValidationException('Validator not exist for this order');
         }
+
         return $validator;
     }
 
     /**
      * @param RedsysResponse $redsysResponse
+     *
      * @throws InvalidResponseSignature
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysException
@@ -68,7 +81,7 @@ final class OrderResponseValidator
     private function isValidSignature(RedsysResponse $redsysResponse)
     {
         if (!$this->redsysRedirection->validatePaymentResponse($redsysResponse)) {
-            throw new InvalidResponseSignature("The signature of response is diferent that expected!");
+            throw new InvalidResponseSignature('The signature of response is diferent that expected!');
         }
     }
 }

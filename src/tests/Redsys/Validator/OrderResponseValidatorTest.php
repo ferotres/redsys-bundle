@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Tests\Redsys\Validator;
 
 use Ferotres\RedsysBundle\Redsys\Exception\InvalidResponseSignature;
@@ -14,8 +20,7 @@ use Ferotres\RedsysBundle\Tests\Redsys\Config;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class OrderResponseValidatorTest
- * @package Ferotres\RedsysBundle\Tests\Redsys\Validator
+ * Class OrderResponseValidatorTest.
  */
 class OrderResponseValidatorTest extends TestCase
 {
@@ -30,7 +35,7 @@ class OrderResponseValidatorTest extends TestCase
     {
         $urlFactory = $this->createMock(UrlFactoryInterface::class);
         $this->config = Config::getConfig();
-        $redsysRedirection = new RedsysRedirection($urlFactory, $this->config );
+        $redsysRedirection = new RedsysRedirection($urlFactory, $this->config);
 
         $this->orderResponseValidator = new OrderResponseValidator($redsysRedirection);
         $this->redsysHelper = new RedsysHelper();
@@ -58,8 +63,6 @@ class OrderResponseValidatorTest extends TestCase
         $validated = $this->orderResponseValidator->validate($redsysResponse);
         $this->assertFalse($validated);
     }
-
-
 
     /**
      * @throws \Exception
@@ -163,7 +166,6 @@ class OrderResponseValidatorTest extends TestCase
         $this->assertTrue($validated);
     }
 
-
     /**
      * @throws \Exception
      * @test
@@ -173,11 +175,10 @@ class OrderResponseValidatorTest extends TestCase
         $responseData = $this->getBasicResponseData();
         $merchantParameters = $this->redsysHelper->createMerchantParameters($responseData);
 
-        $redsysResponse = new RedsysResponse('abcsddsdssdsdsdsds', $merchantParameters, 'test' );
+        $redsysResponse = new RedsysResponse('abcsddsdssdsdsdsds', $merchantParameters, 'test');
 
         $this->expectException(InvalidResponseSignature::class);
         $this->orderResponseValidator->validate($redsysResponse);
-
     }
 
     /**
@@ -208,9 +209,9 @@ class OrderResponseValidatorTest extends TestCase
         $this->orderResponseValidator->validate($redsysResponse);
     }
 
-
     /**
      * @param array $responseData
+     *
      * @return RedsysResponse
      */
     private function createRedsysResponse(array $responseData): RedsysResponse
@@ -220,15 +221,16 @@ class OrderResponseValidatorTest extends TestCase
         $merchantParameters = $this->redsysHelper->createMerchantParameters($responseData);
         $signature = $this->redsysHelper->createSignature($terminal['secret'], $merchantParameters, $responseData['Ds_Order']);
         $signature = strtr($signature, '+/', '-_');
-        return  new RedsysResponse($signature, $merchantParameters, 'test' );
+
+        return  new RedsysResponse($signature, $merchantParameters, 'test');
     }
 
     /**
      * @return array
      */
-    private function getBasicResponseData() :array
+    private function getBasicResponseData(): array
     {
-        return [
+        return array(
             'Ds_Response' => '0000',
             'Ds_Order' => '123456',
             'Ds_Card_Country' => 910,
@@ -236,6 +238,6 @@ class OrderResponseValidatorTest extends TestCase
             'Ds_MerchantCode' => '123456',
             'Ds_TransactionType' => 'O',
             'Ds_Terminal' => 1,
-        ];
+        );
     }
 }

@@ -1,12 +1,17 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys;
 
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
 
 /**
- * Class PaumentOrderBuilder
- * @package Ferotres\RedsysBundle\Redsys
+ * Class PaumentOrderBuilder.
  */
 final class PaymentOrderBuilder
 {
@@ -18,18 +23,18 @@ final class PaymentOrderBuilder
      */
     private function __construct()
     {
-        $this->paymentOrderData = [
-            'app'         => null,
-            'currency'    => 'EUR',
-            'locale'      => 'ES',
-            'order'       => null,
-            'amount'      => null,
-            'titular'     => '',
+        $this->paymentOrderData = array(
+            'app' => null,
+            'currency' => 'EUR',
+            'locale' => 'ES',
+            'order' => null,
+            'amount' => null,
+            'titular' => '',
             'description' => '',
-            'authCode'    => null,
-            'ces'         => false,
-            'userParams'  => []
-        ];
+            'authCode' => null,
+            'ces' => false,
+            'userParams' => array(),
+        );
     }
 
     /**
@@ -42,6 +47,7 @@ final class PaymentOrderBuilder
 
     /**
      * @return PaymentOrder
+     *
      * @throws PaymentOrderException
      */
     public function build()
@@ -50,7 +56,7 @@ final class PaymentOrderBuilder
             || is_null($this->paymentOrderData['order'])
             || is_null($this->paymentOrderData['amount'])
         ) {
-            throw new PaymentOrderException("app|amount|order are required parameters");
+            throw new PaymentOrderException('app|amount|order are required parameters');
         }
 
         return PaymentOrder::create(
@@ -70,61 +76,70 @@ final class PaymentOrderBuilder
     public function toApp(string $appName)
     {
         $this->paymentOrderData['app'] = $appName;
+
         return $this;
     }
 
     public function withCurrency(string $currency)
     {
         $this->paymentOrderData['currency'] = $currency;
+
         return $this;
     }
 
     public function withLocale(string $locale)
     {
         $this->paymentOrderData['locale'] = $locale;
+
         return $this;
     }
 
     public function withOrder(string $order)
     {
         $this->paymentOrderData['order'] = $order;
+
         return $this;
     }
 
     public function withAmount(float $amount)
     {
         $this->paymentOrderData['amount'] = $amount;
+
         return $this;
     }
 
     public function withTitular(string $titular)
     {
         $this->paymentOrderData['titular'] = $titular;
+
         return $this;
     }
 
     public function withDescription(string $description)
     {
         $this->paymentOrderData['description'] = $description;
+
         return $this;
     }
 
     public function withAuthCode(string $authCode)
     {
         $this->paymentOrderData['authCode'] = $authCode;
+
         return $this;
     }
 
     public function usingCes(bool $ces)
     {
         $this->paymentOrderData['ces'] = $ces;
+
         return $this;
     }
 
     public function addUserParams(array $userParams)
     {
         $this->paymentOrderData['userParams'] = $userParams;
+
         return $this;
     }
-
 }

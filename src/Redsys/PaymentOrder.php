@@ -1,60 +1,67 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys;
 
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
 
 /**
- * Class PaymentOrder
- * @package CoreBiz\Redsys
+ * Class PaymentOrder.
  */
 final class PaymentOrder
 {
-    const VALID_CURRENCIES  = ['EUR','USD','GBP','AUD'];
-    const VALID_LOCALES     = ['ES','EN','IT','NL','DE','FR','EL','RU'];
+    const VALID_CURRENCIES = array('EUR', 'USD', 'GBP', 'AUD');
+    const VALID_LOCALES = array('ES', 'EN', 'IT', 'NL', 'DE', 'FR', 'EL', 'RU');
 
     /** Order types */
-    const BLOCK_PAYMENT     = 'O';
-    const DIRECT_PAYMENT    = '0';
+    const BLOCK_PAYMENT = 'O';
+    const DIRECT_PAYMENT = '0';
     const WS_DIRECT_PAYMENT = 'A';
-    const CONFIRM_PAYMENT   = 'P';
-    const CANCEL_PAYMENT    = 'Q';
+    const CONFIRM_PAYMENT = 'P';
+    const CANCEL_PAYMENT = 'Q';
 
-    /** @var int  */
+    /** @var int */
     private $amount;
-    /** @var string  */
+    /** @var string */
     private $currency;
-    /** @var string  */
+    /** @var string */
     private $titular;
-    /** @var string  */
+    /** @var string */
     private $description;
-    /** @var string  */
+    /** @var string */
     private $locale;
-    /** @var string  */
+    /** @var string */
     private $authCode;
-    /** @var string  */
+    /** @var string */
     private $type;
-    /** @var bool  */
+    /** @var bool */
     private $ces;
-    /** @var  string */
+    /** @var string */
     private $app;
-    /** @var  string */
+    /** @var string */
     private $order;
     /** @var array */
     private $routeParams;
 
     /**
      * PaymentOrder constructor.
-     * @param string $app
-     * @param string $currency
-     * @param string $locale
-     * @param string $order
-     * @param float $amount
-     * @param string $titular
-     * @param string $description
+     *
+     * @param string      $app
+     * @param string      $currency
+     * @param string      $locale
+     * @param string      $order
+     * @param float       $amount
+     * @param string      $titular
+     * @param string      $description
      * @param string|null $authCode
-     * @param bool $ces
-     * @param array $routeParams
+     * @param bool        $ces
+     * @param array       $routeParams
+     *
      * @throws PaymentOrderException
      */
     private function __construct(
@@ -66,35 +73,36 @@ final class PaymentOrder
         string $titular,
         string $description,
         string $authCode = null,
-        bool   $ces      = false,
-        array  $routeParams = []
-
+        bool   $ces = false,
+        array  $routeParams = array()
     ) {
         $this->app = $app;
-        $this->currency    = strtoupper($currency);
-        $this->locale      = strtoupper($locale);;
-        $this->order       = $order;
-        $this->amount      = $amount;
-        $this->titular     = $titular;
+        $this->currency = strtoupper($currency);
+        $this->locale = strtoupper($locale);
+        $this->order = $order;
+        $this->amount = $amount;
+        $this->titular = $titular;
         $this->description = $description;
-        $this->authCode    = $authCode;
-        $this->ces         = $ces;
+        $this->authCode = $authCode;
+        $this->ces = $ces;
         $this->routeParams = $routeParams;
         $this->isValidPaymentOrderData();
     }
 
     /**
-     * @param string $app
-     * @param string $currency
-     * @param string $locale
-     * @param string $order
-     * @param float $amount
-     * @param string $titular
-     * @param string $description
+     * @param string      $app
+     * @param string      $currency
+     * @param string      $locale
+     * @param string      $order
+     * @param float       $amount
+     * @param string      $titular
+     * @param string      $description
      * @param string|null $authCode
-     * @param bool $ces
-     * @param array $routeParams
+     * @param bool        $ces
+     * @param array       $routeParams
+     *
      * @return PaymentOrder
+     *
      * @throws PaymentOrderException
      */
     public static function create(
@@ -106,28 +114,10 @@ final class PaymentOrder
         string $titular,
         string $description,
         string $authCode = null,
-        bool   $ces      = false,
-        array  $routeParams = []
+        bool   $ces = false,
+        array  $routeParams = array()
     ) {
         return new self($app, $currency, $locale, $order, $amount, $titular, $description, $authCode, $ces, $routeParams);
-    }
-
-    /**
-     * @throws PaymentOrderException
-     */
-    private function isValidPaymentOrderData()
-    {
-        if (!$this->amount > 0){
-            throw new PaymentOrderException("The amount must be grather than 0");
-        }
-
-        if(!in_array($this->locale(), self::VALID_LOCALES)){
-            throw new PaymentOrderException("The locale is not valid");
-        }
-
-        if(!in_array($this->currency(), self::VALID_CURRENCIES)){
-            throw new PaymentOrderException("The currency is not valid");
-        }
     }
 
     /**
@@ -135,7 +125,7 @@ final class PaymentOrder
      */
     public function amount(): int
     {
-        return (string)$this->amount;
+        return (string) $this->amount;
     }
 
     /**
@@ -197,7 +187,7 @@ final class PaymentOrder
     /**
      * @return bool
      */
-    public function ces() :bool
+    public function ces(): bool
     {
         return $this->ces;
     }
@@ -205,7 +195,7 @@ final class PaymentOrder
     /**
      * @return string
      */
-    public function app() :string
+    public function app(): string
     {
         return $this->app;
     }
@@ -213,7 +203,7 @@ final class PaymentOrder
     /**
      * @return array
      */
-    public function routeParams():array
+    public function routeParams(): array
     {
         return $this->routeParams;
     }
@@ -224,5 +214,23 @@ final class PaymentOrder
     public function setType(string $type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @throws PaymentOrderException
+     */
+    private function isValidPaymentOrderData()
+    {
+        if (!$this->amount > 0) {
+            throw new PaymentOrderException('The amount must be grather than 0');
+        }
+
+        if (!in_array($this->locale(), self::VALID_LOCALES)) {
+            throw new PaymentOrderException('The locale is not valid');
+        }
+
+        if (!in_array($this->currency(), self::VALID_CURRENCIES)) {
+            throw new PaymentOrderException('The currency is not valid');
+        }
     }
 }

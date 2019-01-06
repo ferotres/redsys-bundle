@@ -1,8 +1,13 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Tests\Redsys\Services;
 
-use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
 use Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException;
 use Ferotres\RedsysBundle\Redsys\Exception\RedsysException;
 use Ferotres\RedsysBundle\Redsys\PaymentOrderBuilder;
@@ -14,12 +19,10 @@ use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class RedsysRedirectionTest
- * @package Ferotres\RedsysBundle\Tests\Redsys\Services
+ * Class RedsysRedirectionTest.
  */
 class RedsysRedirectionTest extends TestCase
 {
-
     /** @var array */
     private $config;
     /** @var RedsysRedirection */
@@ -140,8 +143,6 @@ class RedsysRedirectionTest extends TestCase
         $this->assertInstanceOf(RedsysOrder::class, $redsysOrder);
     }
 
-
-
     /**
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
@@ -190,7 +191,6 @@ class RedsysRedirectionTest extends TestCase
 
         $this->expectException(RedsysException::class);
         $this->redsysRedirection->confirmAuthorization($paymentOrder);
-
     }
 
     /**
@@ -237,9 +237,7 @@ class RedsysRedirectionTest extends TestCase
 
         $this->expectException(RedsysException::class);
         $this->redsysRedirection->cancelAuthorization($paymentOrder);
-
     }
-
 
     /**
      * @throws \Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException
@@ -273,7 +271,6 @@ class RedsysRedirectionTest extends TestCase
      */
     public function whenAppNotConfiguredThrowException()
     {
-
         $urlFactory = $this->createMock(UrlFactoryInterface::class);
         unset($this->config['shops']['test']);
         $redsysRedirection = new RedsysRedirection($urlFactory, $this->config);
@@ -287,7 +284,6 @@ class RedsysRedirectionTest extends TestCase
             ->withLocale('es')
             ->withCurrency('EUR')
             ->build();
-
 
         $this->expectException(RedsysConfigException::class);
         $redsysRedirection->createAuthorization($paymentOrder);

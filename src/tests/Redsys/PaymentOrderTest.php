@@ -1,13 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: antonio-xps
- * Date: 6/01/19
- * Time: 1:47
+
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Ferotres\RedsysBundle\Tests\Redsys;
-
 
 use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
 use Ferotres\RedsysBundle\Redsys\PaymentOrder;

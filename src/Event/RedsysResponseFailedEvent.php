@@ -1,59 +1,67 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Event;
 
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class RedsysResponseFailedEvent
- * @package Ferotres\RedsysBundle\Event
+ * Class RedsysResponseFailedEvent.
  */
-final class RedsysResponseFailedEvent  extends Event
+final class RedsysResponseFailedEvent extends Event
 {
-    /**  @var array */
+    /** @var array */
     private $params;
     /** @var RedsysResponse */
     private $redsysResponse;
-    /**  @var bool */
+    /** @var bool */
     private $validated;
     /** @var \Throwable */
     private $exception;
 
     /**
      * RedsysResponseFailedEvent constructor.
+     *
      * @param RedsysResponse|null $redsysResponse
-     * @param array $params
-     * @param bool $validated
-     * @param \Throwable|null $exception
+     * @param array               $params
+     * @param bool                $validated
+     * @param \Throwable|null     $exception
      */
     public function __construct(
         ?RedsysResponse $redsysResponse,
-        array $params         = [],
-        bool $validated       = false,
+        array $params = array(),
+        bool $validated = false,
         \Throwable $exception = null
     ) {
         $this->redsysResponse = $redsysResponse;
-        $this->params         = $params;
-        $this->validated      = $validated;
-        $this->exception      = $exception;
+        $this->params = $params;
+        $this->validated = $validated;
+        $this->exception = $exception;
     }
 
     /**
      * @param $method
      * @param $properties
+     *
      * @return mixed|null
      */
     public function __call($method, $properties)
     {
         $property = lcfirst(str_replace('get', '', $method));
+
         return $this->params[$property] ?? null;
     }
 
     /**
      * @return bool
      */
-    public function isValidated():bool
+    public function isValidated(): bool
     {
         return $this->validated;
     }
@@ -66,7 +74,7 @@ final class RedsysResponseFailedEvent  extends Event
         return $this->exception;
     }
 
-    public function redsysResponse():?RedsysResponse
+    public function redsysResponse(): ?RedsysResponse
     {
         return $this->redsysResponse;
     }

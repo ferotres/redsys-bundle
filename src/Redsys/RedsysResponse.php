@@ -1,74 +1,59 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys;
 
 /**
- * Class RedsysResponse
- * @package CoreBiz\Redsys
+ * Class RedsysResponse.
  */
 final class RedsysResponse
 {
-    /** @var string  */
+    /** @var string */
     private $signature;
-    /** @var string  */
+    /** @var string */
     private $params;
-    /** @var string   */
+    /** @var string */
     private $order;
-    /** @var string  */
+    /** @var string */
     private $currencyCode;
-    /** @var string  */
+    /** @var string */
     private $terminal;
-    /** @var string  */
+    /** @var string */
     private $amount;
-    /** @var string  */
+    /** @var string */
     private $countryCode;
-    /** @var string  */
+    /** @var string */
     private $responseCode;
-    /** @var string  */
+    /** @var string */
     private $authCode;
-    /** @var  string */
+    /** @var string */
     private $cardBrand;
-    /** @var  string */
+    /** @var string */
     private $merchantCode;
-    /** @var  bool */
+    /** @var bool */
     private $ces;
-    /** @var  string */
+    /** @var string */
     private $type;
-    /** @var  string */
+    /** @var string */
     private $app;
 
     /**
      * RedsysResponse constructor.
+     *
      * @param string $signature
      * @param string $responseParams
      */
-    public function __construct( string $signature, string $responseParams, $app = null)
+    public function __construct(string $signature, string $responseParams, $app = null)
     {
         $this->signature = $signature;
-        $this->params    = $responseParams;
-        $this->app       = $app;
+        $this->params = $responseParams;
+        $this->app = $app;
         $this->extractParams();
-    }
-
-    /**
-     *
-     */
-    private function extractParams()
-    {
-        $jsonData = base64_decode($this->params);
-        $data     = json_decode($jsonData, true);
-
-        $this->order        = $data['Ds_Order'];
-        $this->amount       = $data['Ds_Amount'] ?? null;
-        $this->terminal     = $data['Ds_Terminal'];
-        $this->countryCode  = $data['Ds_Card_Country'];
-        $this->currencyCode = $data['Ds_Currency'];
-        $this->responseCode = $data['Ds_Response'];
-        $this->authCode     = $data['Ds_AuthorisationCode'] ?? null;
-        $this->cardBrand    = $data['Ds_Card_Brand'] ?? null;
-        $this->merchantCode = $data['Ds_MerchantCode'];
-        $this->type         = $data['Ds_TransactionType'];
-        $this->ces          = $data['Ds_SecurePayment'] ?? false;
     }
 
     /**
@@ -152,7 +137,7 @@ final class RedsysResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function app()
     {
@@ -167,4 +152,21 @@ final class RedsysResponse
         return $this->ces;
     }
 
+    private function extractParams()
+    {
+        $jsonData = base64_decode($this->params);
+        $data = json_decode($jsonData, true);
+
+        $this->order = $data['Ds_Order'];
+        $this->amount = $data['Ds_Amount'] ?? null;
+        $this->terminal = $data['Ds_Terminal'];
+        $this->countryCode = $data['Ds_Card_Country'];
+        $this->currencyCode = $data['Ds_Currency'];
+        $this->responseCode = $data['Ds_Response'];
+        $this->authCode = $data['Ds_AuthorisationCode'] ?? null;
+        $this->cardBrand = $data['Ds_Card_Brand'] ?? null;
+        $this->merchantCode = $data['Ds_MerchantCode'];
+        $this->type = $data['Ds_TransactionType'];
+        $this->ces = $data['Ds_SecurePayment'] ?? false;
+    }
 }

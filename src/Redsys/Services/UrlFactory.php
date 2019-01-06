@@ -1,16 +1,20 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys\Services;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class UrlFactory
- * @package Ferotres\RedsysBundle\Redsys\Services
+ * Class UrlFactory.
  */
 final class UrlFactory implements UrlFactoryInterface
 {
-
     /**
      * @var UrlGeneratorInterface
      */
@@ -21,7 +25,7 @@ final class UrlFactory implements UrlFactoryInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function generateUrl(string $route, array $params = [])
+    public function generateUrl(string $route, array $params = array())
     {
         return $this->urlGenerator->generate($route, $params, 0);
     }

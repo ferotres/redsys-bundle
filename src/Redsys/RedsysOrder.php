@@ -1,24 +1,30 @@
 <?php
 
+/*
+ * This file is part of the FerotresRedsysBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ferotres\RedsysBundle\Redsys;
 
 /**
- * Class RedsysFormData
- * @package CoreBiz\Redsys
+ * Class RedsysFormData.
  */
 final class RedsysOrder
 {
-    /** @var string  */
+    /** @var string */
     private $url;
-    /** @var string  */
+    /** @var string */
     private $version;
-    /** @var string  */
+    /** @var string */
     private $signature;
-    /** @var string  */
+    /** @var string */
     private $orderData;
 
     /**
      * RedsysFormData constructor.
+     *
      * @param $url
      * @param $version
      * @param $signature
@@ -26,8 +32,8 @@ final class RedsysOrder
      */
     public function __construct(string $url, string $version, string $signature, string $orderData)
     {
-        $this->url       = $url;
-        $this->version   = $version;
+        $this->url = $url;
+        $this->version = $version;
         $this->signature = $signature;
         $this->orderData = $orderData;
     }
@@ -61,14 +67,13 @@ final class RedsysOrder
      */
     public function toArray(): array
     {
-        return [
-            'formData'=>[
-                'Ds_SignatureVersion'   =>  $this->version(),
+        return array(
+            'formData' => array(
+                'Ds_SignatureVersion' => $this->version(),
                 'Ds_MerchantParameters' => $this->orderData(),
-                'Ds_Signature'          => $this->signature(),
-            ],
-            'url' => $this->url
-        ];
+                'Ds_Signature' => $this->signature(),
+            ),
+            'url' => $this->url,
+        );
     }
-
 }
