@@ -3,6 +3,8 @@
 namespace Ferotres\RedsysBundle\Tests\Redsys\Validator;
 
 use Ferotres\RedsysBundle\Redsys\Exception\InvalidResponseSignature;
+use Ferotres\RedsysBundle\Redsys\Exception\RedsysException;
+use Ferotres\RedsysBundle\Redsys\Exception\ResponseValidationException;
 use Ferotres\RedsysBundle\Redsys\Helper\RedsysHelper;
 use Ferotres\RedsysBundle\Redsys\RedsysResponse;
 use Ferotres\RedsysBundle\Redsys\Services\RedsysRedirection;
@@ -177,6 +179,35 @@ class OrderResponseValidatorTest extends TestCase
         $this->orderResponseValidator->validate($redsysResponse);
 
     }
+
+    /**
+     * @throws \Exception
+     * @test
+     */
+    public function WhenTerminalNotExistThenThrowException()
+    {
+        $responseData = $this->getBasicResponseData();
+        $responseData['Ds_Terminal'] = 8;
+        $redsysResponse = $this->createRedsysResponse($responseData);
+
+        $this->expectException(RedsysException::class);
+        $this->orderResponseValidator->validate($redsysResponse);
+    }
+
+    /**
+     * @throws \Exception
+     * @test
+     */
+    public function WhenPaymentTypeNotExistThenThrowException()
+    {
+        $responseData = $this->getBasicResponseData();
+        $responseData['Ds_TransactionType'] = 'L';
+        $redsysResponse = $this->createRedsysResponse($responseData);
+
+        $this->expectException(ResponseValidationException::class);
+        $this->orderResponseValidator->validate($redsysResponse);
+    }
+
 
     /**
      * @param array $responseData

@@ -118,12 +118,8 @@ final class PaymentOrder
      */
     private function isValidPaymentOrderData()
     {
-        if(!$this->amount > 0){
+        if (!$this->amount > 0){
             throw new PaymentOrderException("The amount must be grather than 0");
-        }
-
-        if(!$this->app()){
-            throw new PaymentOrderException("The app name is required");
         }
 
         if(!in_array($this->locale(), self::VALID_LOCALES)){

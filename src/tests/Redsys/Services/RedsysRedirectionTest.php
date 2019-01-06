@@ -2,6 +2,8 @@
 
 namespace Ferotres\RedsysBundle\Tests\Redsys\Services;
 
+use Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException;
+use Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException;
 use Ferotres\RedsysBundle\Redsys\Exception\RedsysException;
 use Ferotres\RedsysBundle\Redsys\PaymentOrderBuilder;
 use Ferotres\RedsysBundle\Redsys\RedsysOrder;
@@ -236,5 +238,58 @@ class RedsysRedirectionTest extends TestCase
         $this->expectException(RedsysException::class);
         $this->redsysRedirection->cancelAuthorization($paymentOrder);
 
+    }
+
+
+    /**
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysException
+     * @test
+     */
+    public function whenTerminalNotExistThrowException()
+    {
+        $paymentOrder = PaymentOrderBuilder::create()
+            ->withAmount(1000)
+            ->toApp('test')
+            ->withOrder('123456')
+            ->withTitular('testman')
+            ->withDescription('Test')
+            ->withLocale('es')
+            ->withCurrency('AUD')
+            ->build();
+
+        $this->expectException(RedsysException::class);
+        $this->redsysRedirection->createAuthorization($paymentOrder);
+    }
+
+    /**
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\PaymentOrderException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysCallbackException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysConfigException
+     * @throws \Ferotres\RedsysBundle\Redsys\Exception\RedsysException
+     * @test
+     */
+    public function whenAppNotConfiguredThrowException()
+    {
+
+        $urlFactory = $this->createMock(UrlFactoryInterface::class);
+        unset($this->config['shops']['test']);
+        $redsysRedirection = new RedsysRedirection($urlFactory, $this->config);
+
+        $paymentOrder = PaymentOrderBuilder::create()
+            ->withAmount(1000)
+            ->toApp('test4')
+            ->withOrder('123456')
+            ->withTitular('testman')
+            ->withDescription('Test')
+            ->withLocale('es')
+            ->withCurrency('EUR')
+            ->build();
+
+
+        $this->expectException(RedsysConfigException::class);
+        $redsysRedirection->createAuthorization($paymentOrder);
     }
 }
