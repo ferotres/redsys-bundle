@@ -49,7 +49,7 @@ ferotres_redsys:
            merchant_code: '45677897'
            success: 'payment-success' # route for payment succes redirection
            error:   'payment-serror'  # route for payment error redirection
-           terminals: # One terminalis mandatory
+           terminals: # One terminal is mandatory
               - { secret: 'sq7HjrUOBfKmC344354fvv0gJ7', ces: true,  num: 1, iso_currency: 'EUR' }
               - { secret: 'sq7Hvfrty676LgskD5srU870g7', ces: false, num: 2, iso_currency: 'EUR' }
               - { secret: 'sq7HjrUOBfKmC576ILyythU870', ces: false, num: 4, iso_currency: 'USD' }
@@ -185,7 +185,7 @@ $redsysOrder = $this->redsysRedirection->confirmAuthorization($paymentOrder);
 
 ```
 
-Create Payment Cancelation
+Create Payment Cancellation
 ----------------------------
  Is similar to confirmation, all params must be the same as authorization. For use this payment method, the terminals must be allow transaction type **Q**.
 ``` php
@@ -194,7 +194,7 @@ Create Payment Cancelation
 $redsysOrder = $this->redsysRedirection->cancelAuthorization($paymentOrder);
 ```
 
-Handle succes and error callbacks
+Handle success and error callbacks
 ---------------------------------
 ``` php
 class PaymentController extends AbstractController
