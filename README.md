@@ -224,7 +224,7 @@ Handle redsys notification response
 
 For handle the notification you can use event listener or a eventSubscriber, in this case i use a event listener.
 
-**Event Litener**
+**Event Listener**
 ``` php
 // src/EventListener/PaymentResponseHandler.php
 class PaymentResponseHandler
