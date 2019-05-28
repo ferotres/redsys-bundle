@@ -28,7 +28,7 @@
             public="true"
         >
             <argument type="service" id="ferotres_redsys.redirection" />
-            <argument type="service" id="debug.event_dispatcher.inner" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="ferotres_redsys.order_response_validator" />
         </service>
 
